@@ -10,6 +10,7 @@ import com.example.coolweathertest.model.Province;
 public class Utility {
 	//处理服务器返回的省级数据
 	public synchronized static boolean handleProvincesResponse(CoolWeatherDB coolWeatherDB,String response){
+		LogUtil.d("TAG", "handleProvincesResponse()");
 		if(!TextUtils.isEmpty(response)){
 			String[] allProvinces=response.split(",");
 			if(allProvinces!=null&&allProvinces.length>0){
@@ -30,6 +31,7 @@ public class Utility {
 
 	//处理服务器返回的市级数据
 	public  static boolean handleCitiesResponse(CoolWeatherDB coolWeatherDB,String response,int provinceId){
+		LogUtil.d("TAG", "handleCitiesResponse()");
 		if(!TextUtils.isEmpty(response)){
 			String[] allCities=response.split(",");
 			if(allCities!=null&&allCities.length>0){
@@ -49,6 +51,7 @@ public class Utility {
 	
 	//处理服务器返回的县级数据
 	public static boolean handleCountiesResponse(CoolWeatherDB coolWeatherDB,String response,int cityId){
+		LogUtil.d("TAG", "handleCountiesResponse()");
 		if(!TextUtils.isEmpty(response)){
 			String[] allCounties=response.split(",");
 			if(allCounties!=null&&allCounties.length>0){

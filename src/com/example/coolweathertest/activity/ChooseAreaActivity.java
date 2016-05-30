@@ -17,6 +17,7 @@ import com.example.coolweathertest.model.Province;
 
 import com.example.coolweathertest.util.HttpCallbackListener;
 import com.example.coolweathertest.util.HttpUtil;
+import com.example.coolweathertest.util.LogUtil;
 import com.example.coolweathertest.util.Utility;
 
 import android.app.Activity;
@@ -83,6 +84,7 @@ public class ChooseAreaActivity extends Activity {
 	}
 //查询全国所有省，优先从数据库查询，如果没有再到服务器上去查询
 	private void queryProvinces() {
+		LogUtil.d("TAG", "queryProvinces()");
 		provinceList=coolWeatherDB.loadProvinces();
 		if(provinceList.size()>0){
 			dataList.clear();
@@ -101,6 +103,7 @@ public class ChooseAreaActivity extends Activity {
 	
 	//查询选中省内的所有城市，优先从数据库查询，如果没有再到服务器上查询
 	private void queryCities(){
+		LogUtil.d("TAG", "queryCities()");
 		cityList=coolWeatherDB.loadCities(selectedProvince.getId());
 		if(cityList.size()>0){
 			dataList.clear();
@@ -119,6 +122,7 @@ public class ChooseAreaActivity extends Activity {
 	
 	//查询选中城市内所有的县，优先从数据库开始，如果没有再到服务器上查询
 	private void queryCounties(){
+		LogUtil.d("TAG", "queryCounties()");
 		countyList=coolWeatherDB.loadCounties(selectedCity.getId());
 		if(countyList.size()>0){
 			dataList.clear();
@@ -135,6 +139,7 @@ public class ChooseAreaActivity extends Activity {
 	}
 	//根据传入的代号和类型从服务器上查询省，市，县数据
 	private void queryFromServer(final String code, final String type) {
+		LogUtil.d("TAG", "queryFromServer()");
 		String address;
 		if(!TextUtils.isEmpty(code)){
 			address="http://www.weather.com.cn/data/list3/city"+code+".xml";//获取城市，县信息

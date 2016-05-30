@@ -6,6 +6,7 @@ import java.util.List;
 import com.example.coolweathertest.model.City;
 import com.example.coolweathertest.model.County;
 import com.example.coolweathertest.model.Province;
+import com.example.coolweathertest.util.LogUtil;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -36,6 +37,7 @@ public class CoolWeatherDB {
 	
 	//将Province实例存储到数据库
 	public void saveProvince(Province province){
+		LogUtil.d("TAG", "saveProvince()");
 		if(province!=null){
 			ContentValues values=new ContentValues();
 			values.put("province_name", province.getProvinceName());
@@ -45,6 +47,7 @@ public class CoolWeatherDB {
 	}
 	//从数据库读取全国所有省份信息
 	public List<Province> loadProvinces(){
+		LogUtil.d("TAG", "loadProvinces()");
 		List<Province> list=new ArrayList<Province>();
 		Cursor cursor=db.query("Province",null,null,null,null,null,null);
 		if(cursor.moveToFirst()){
@@ -64,6 +67,7 @@ public class CoolWeatherDB {
 	
 	//将city实例存储到数据库
 	public void saveCity(City city){
+		LogUtil.d("TAG", "saveCity()");
 		if(city!=null){
 			ContentValues values=new ContentValues();
 			values.put("city_name", city.getCityName());
@@ -74,6 +78,7 @@ public class CoolWeatherDB {
 	}
 	//从数据库读取某省下所有城市的信息
 	public List<City> loadCities(int provinceId){
+		LogUtil.d("TAG", "loadCities()");
 		List<City> list =new ArrayList<City>();
 		Cursor cursor=db.query("City", null, "provinceId=?", new String []{String.valueOf(provinceId)}, null, null, null);
 		if(cursor.moveToFirst())
@@ -95,6 +100,7 @@ public class CoolWeatherDB {
 	
 	//将County实例存储到数据库
 	public void saveCounty(County county){
+		LogUtil.d("TAG", "saveCounty()");
 		if(county!=null){
 			ContentValues values=new ContentValues();
 			values.put("county_name", county.getCountyName());
@@ -105,6 +111,7 @@ public class CoolWeatherDB {
 	}
 	//从数据库读取某城市下所有的counties信息
 	public List<County> loadCounties(int cityId){
+		LogUtil.d("TAG", "loadCounties()");
 		List<County> list=new ArrayList<County>();
 		Cursor cursor=db.query("County", null, "cityId=?",new String[]{String.valueOf(cityId)}, null,null,null);
 		if(cursor.moveToFirst()){
