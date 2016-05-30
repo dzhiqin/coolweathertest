@@ -8,6 +8,8 @@ import java.net.URL;
 
 public class HttpUtil {
 	public static void sendHttpRequest(final String address,final HttpCallbackListener listener){
+		LogUtil.v("TAG","sendHttpRequest()");
+		LogUtil.v("TAG", "address="+address);
 		new Thread(new Runnable(){
 
 			@Override
@@ -22,7 +24,7 @@ public class HttpUtil {
 					InputStream in=connection.getInputStream();
 					BufferedReader reader=new BufferedReader (new InputStreamReader(in));
 					StringBuilder response=new StringBuilder();
-					String line="";
+					String line;
 					while((line=reader.readLine())!=null){
 						response.append(line);
 					}

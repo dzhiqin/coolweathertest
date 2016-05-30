@@ -35,8 +35,8 @@ import android.widget.Toast;
 public class ChooseAreaActivity extends Activity {
 
 	public static final int LEVEL_PROVINCE=0;
-	public static final int LEVEL_CITY=0;
-	public static final int LEVEL_COUNTY=0;
+	public static final int LEVEL_CITY=1;
+	public static final int LEVEL_COUNTY=2;
 	private ProgressDialog progressDialog;
 	private TextView titleText;
 	private ListView listView;
@@ -75,6 +75,7 @@ public class ChooseAreaActivity extends Activity {
 					queryCities();
 				}else if(currentLevel==LEVEL_CITY){
 					selectedCity=cityList.get(position);
+					//LogUtil.v("TAG", "selectedCity="+selectedCity.getCityName());
 					queryCounties();
 				}
 			}
@@ -96,7 +97,7 @@ public class ChooseAreaActivity extends Activity {
 			titleText.setText("中国");
 			currentLevel=LEVEL_PROVINCE;
 		}else{
-			queryFromServer(null,"Province");
+			queryFromServer(null,"province");
 		}
 		
 	}
@@ -122,7 +123,8 @@ public class ChooseAreaActivity extends Activity {
 	
 	//查询选中城市内所有的县，优先从数据库开始，如果没有再到服务器上查询
 	private void queryCounties(){
-		LogUtil.d("TAG", "queryCounties()");
+		LogUtil.v("TAG", "queryCounties()");
+		LogUtil.v("TAG", "selectedCity="+selectedCity.getCityName());
 		countyList=coolWeatherDB.loadCounties(selectedCity.getId());
 		if(countyList.size()>0){
 			dataList.clear();
@@ -151,6 +153,7 @@ public class ChooseAreaActivity extends Activity {
 
 			@Override
 			public void onFinish(String response) {
+				LogUtil.v("TAG", "sendHttpRequest_onFinish()");
 				boolean result=false;
 				if("province".equals(type)){
 					result=Utility.handleProvincesResponse(coolWeatherDB, response);
@@ -167,7 +170,7 @@ public class ChooseAreaActivity extends Activity {
 							if("province".equals(type)){
 								queryProvinces();
 							}else if("city".equals(type)){
-								queryCounties();
+								queryCities();
 							}else if("county".equals(type)){
 								queryCounties();
 							}
