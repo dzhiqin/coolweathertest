@@ -23,12 +23,9 @@ public class HttpUtil {
 					connection.setConnectTimeout(8000);
 					connection.setReadTimeout(8000);
 					
-					InputStream in=connection.getInputStream();
-					LogUtil.v("TAG", "sendRequest_newThreadrun()1");
-					BufferedReader reader=new BufferedReader (new InputStreamReader(in));
-					LogUtil.v("TAG", "sendRequest_newThreadrun(2)");
+					InputStream in=connection.getInputStream();					
+					BufferedReader reader=new BufferedReader (new InputStreamReader(in));	
 					StringBuilder response=new StringBuilder();
-					LogUtil.v("TAG", "sendRequest_newThreadrun(3)");
 					String line;
 					while((line=reader.readLine())!=null){
 						response.append(line);

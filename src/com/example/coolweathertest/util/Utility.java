@@ -19,11 +19,12 @@ import com.example.coolweathertest.model.Province;
 
 public class Utility {
 	public static void handleWeatherResponse(Context context,String response){
+		LogUtil.v("TAG","Utility_handleWeatherResponse");
 		try{
 			JSONObject jsonObject=new JSONObject(response);
 			JSONObject weatherInfo=jsonObject.getJSONObject("weatherinfo");
 			String cityName=weatherInfo.getString("city");
-			String weatherCode=weatherInfo.getString("cityId");
+			String weatherCode=weatherInfo.getString("cityid");
 			String temp1=weatherInfo.getString("temp1");
 			String temp2=weatherInfo.getString("temp2");
 			String weatherDesp=weatherInfo.getString("weather");
@@ -36,6 +37,7 @@ public class Utility {
 	//将服务器返回的所有天气信息储存到sharedpreferences文件中
 	public static void saveWeatherInfo(Context context,String cityName,String weatherCode,String temp1,String temp2,
 			String weatherDesp,String publishTime){
+		LogUtil.v("TAG","Utility_saveWeatherInfo");
 		SimpleDateFormat sdf=new SimpleDateFormat("yyy年M月d日",Locale.CHINA);
 		SharedPreferences.Editor editor=PreferenceManager.getDefaultSharedPreferences(context).edit();
 		editor.putBoolean("city_selected", true);
