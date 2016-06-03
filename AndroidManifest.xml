@@ -9,9 +9,10 @@
         android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
@@ -25,6 +26,8 @@
         </activity>
         
         <activity android:name="com.example.coolweathertest.activity.WeatherActivity"></activity>
+        <service android:name="com.example.coolweathertest.service.AutoUpdateService"></service>
+        <receiver android:name="com.example.coolweathertest.service.AutoUpdateReceiver"></receiver>
     </application>
 
 </manifest>
